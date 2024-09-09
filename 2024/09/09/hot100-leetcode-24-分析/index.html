@@ -1,0 +1,158 @@
+<!doctype html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>hot100 leetcode-24 分析-冰阔乐yyds&#39;s Blog</title>
+    
+    <meta name="keywords" content="">
+    <meta name="description" content="">
+    <link href="/bootstrap-5.1.3-dist/css/bootstrap.min.css" rel="stylesheet">    
+    <link rel="stylesheet" href="/css/main.css" />
+    
+    <meta name="msvalidate.01" content="D8350FC7417B692DE23E5326C13202D3" />
+<meta name="generator" content="Hexo 7.2.0"></head>
+<body class="wave">
+    <nav class="navbar blog-header navbar-expand-lg ">
+        <div class="container-fluid">
+            <a class="navbar-brand" href="/">冰阔乐yyds&#39;s Blog</a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="菜单">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+                
+                    <li class="nav-item">
+                        <a class="nav-link" href="/">首页</a>
+                    </li>
+                
+                    <li class="nav-item">
+                        <a class="nav-link" href="/about/">关于</a>
+                    </li>
+                
+                </ul>
+            </div>
+        </div>
+    </nav>
+    <div class="container blog-content">
+        <div class="row">
+            <div class="col-xs-12 col-sm-12 col-md-12 col-lg-9 col-xl-9 col-xxl-9">
+                <div class="blog-post-detail">
+    <div class="blog-post-title">
+      <h1>hot100 leetcode-24 分析</h1>
+    </div>
+    <div class="blog-post-meta">
+        
+        <span class="post-time">更新于：2024-09-09 21:26:08</span>
+        
+        <span class="post-time">发布于：2024-09-09 21:10:24</span>
+    </div>
+    <div class="blog-post-content">
+      <div class="blog-post-ad">
+        <!-- <h3>为感谢各位朋友对本站的关注，在2021年元旦即将到来之际为大家提供一张「腾讯视频VIP兑换卡」，扫描下方的小程序二维码即可参与活动，活动中奖者将获得一张「腾讯视频VIP兑换卡」，感谢大家对小站的支持，祝大家好运并提前祝大家新年快乐！</h3> -->
+        <!-- <div>
+          <a href="https://cloud.tencent.com/developer/grocery-stall3?invitedUid=2725480" target="_parent"><img src="/image/ad_image.png" alt="扫码参与活动，攒云+值，得云+社区定制礼盒"></a>
+        </div> -->
+      </div>
+      <h1 id="24-两两交换链表中的节点"><a href="#24-两两交换链表中的节点" class="headerlink" title="24. 两两交换链表中的节点"></a><a target="_blank" rel="noopener" href="https://leetcode.cn/problems/swap-nodes-in-pairs/">24. 两两交换链表中的节点</a></h1><p>给你一个链表，两两交换其中相邻的节点，并返回交换后链表的头节点。你必须在不修改节点内部的值的情况下完成本题（即，只能进行节点交换）。</p>
+<p><img src="/2024/09/09/hot100-leetcode-24-%E5%88%86%E6%9E%90/swap_ex1.jpg" alt="img"></p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">输入：head = [1,2,3,4]</span><br><span class="line">输出：[2,1,4,3]</span><br></pre></td></tr></table></figure>
+
+<p><strong>示例 2：</strong></p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">输入：head = []</span><br><span class="line">输出：[]</span><br></pre></td></tr></table></figure>
+
+<p><strong>示例 3：</strong></p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">输入：head = [1]</span><br><span class="line">输出：[1]</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>链表中节点的数目在范围 <code>[0, 100]</code> 内</li>
+<li><code>0 &lt;= Node.val &lt;= 100</code></li>
+</ul>
+<h2 id="题解分析："><a href="#题解分析：" class="headerlink" title="题解分析："></a>题解分析：</h2><p>方法迭代<br>思路与算法</p>
+<p>也可以通过迭代的方式实现两两交换链表中的节点。</p>
+<p>创建哑结点 dummyHead，令 dummyHead.next &#x3D; head。令 temp 表示当前到达的节点，初始时 temp &#x3D; dummyHead。每次需要交换 temp 后面的两个节点。</p>
+<p>如果 temp 的后面没有节点或者只有一个节点，则没有更多的节点需要交换，因此结束交换。否则，获得 temp 后面的两个节点 node1 和 node2，通过更新节点的指针关系实现两两交换节点。</p>
+<p>具体而言，交换之前的节点关系是 temp -&gt; node1 -&gt; node2，交换之后的节点关系要变成 temp -&gt; node2 -&gt; node1，因此需要进行如下操作。</p>
+<h2 id="解法"><a href="#解法" class="headerlink" title="解法"></a>解法</h2><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * Definition for singly-linked list.</span></span><br><span class="line"><span class="comment"> * public class ListNode &#123;</span></span><br><span class="line"><span class="comment"> *     int val;</span></span><br><span class="line"><span class="comment"> *     ListNode next;</span></span><br><span class="line"><span class="comment"> *     ListNode() &#123;&#125;</span></span><br><span class="line"><span class="comment"> *     ListNode(int val) &#123; this.val = val; &#125;</span></span><br><span class="line"><span class="comment"> *     ListNode(int val, ListNode next) &#123; this.val = val; this.next = next; &#125;</span></span><br><span class="line"><span class="comment"> * &#125;</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="keyword">class</span> <span class="title class_">Solution</span> &#123;</span><br><span class="line">    <span class="keyword">public</span> ListNode <span class="title function_">swapPairs</span><span class="params">(ListNode head)</span> &#123;</span><br><span class="line">        <span class="comment">//创建哑结点</span></span><br><span class="line">        <span class="type">ListNode</span> <span class="variable">dummyHead</span> <span class="operator">=</span> <span class="keyword">new</span> <span class="title class_">ListNode</span>(<span class="number">0</span>);</span><br><span class="line">        dummyHead.next = head;</span><br><span class="line">        <span class="type">ListNode</span> <span class="variable">temp</span> <span class="operator">=</span> dummyHead;</span><br><span class="line">        <span class="comment">// 当给出链表不为空或下一个链表组合不为空时</span></span><br><span class="line">        <span class="keyword">while</span>(temp.next != <span class="literal">null</span> &amp;&amp; temp.next.next != <span class="literal">null</span>)&#123;</span><br><span class="line">            <span class="comment">// 需要进行操作的结点</span></span><br><span class="line">            <span class="type">ListNode</span> <span class="variable">node1</span> <span class="operator">=</span> temp.next;</span><br><span class="line">            <span class="type">ListNode</span> <span class="variable">node2</span> <span class="operator">=</span> temp.next.next;</span><br><span class="line">            <span class="comment">// 进行交换操作</span></span><br><span class="line">            temp.next = node2;</span><br><span class="line">            node1.next = node2.next;</span><br><span class="line">            node2.next = node1;</span><br><span class="line">            temp = node1;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> dummyHead.next;</span><br><span class="line"></span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h2 id="图解"><a href="#图解" class="headerlink" title="图解"></a>图解</h2><p><img src="/2024/09/09/hot100-leetcode-24-%E5%88%86%E6%9E%90/image-20240909212149755.png" alt="image-20240909212149755"></p>
+<p><img src="/2024/09/09/hot100-leetcode-24-%E5%88%86%E6%9E%90/image-20240909212218443.png" alt="image-20240909212218443"></p>
+<p><img src="/2024/09/09/hot100-leetcode-24-%E5%88%86%E6%9E%90/image-20240909212251919.png" alt="image-20240909212251919"></p>
+<p><img src="/2024/09/09/hot100-leetcode-24-%E5%88%86%E6%9E%90/image-20240909212319332.png" alt="image-20240909212319332"></p>
+<p><img src="/2024/09/09/hot100-leetcode-24-%E5%88%86%E6%9E%90/image-20240909212357952.png" alt="image-20240909212357952"></p>
+<p>完成了交换，进行下一组合节点操作</p>
+<p><img src="/2024/09/09/hot100-leetcode-24-%E5%88%86%E6%9E%90/image-20240909212448269.png" alt="image-20240909212448269"></p>
+<p><img src="/2024/09/09/hot100-leetcode-24-%E5%88%86%E6%9E%90/image-20240909212536752.png" alt="image-20240909212536752"></p>
+
+      <div class="blog-post-footer">
+        <!-- <p><img src="/image/qrcode.jpg" alt=""></p>
+        <p><b>用心体验、认真记录</b>，欢迎关注<a target="_blank" rel="noopener" href="https://www.edulinks.cn">大江小浪</a>的技术人生！</p> -->
+      </div>
+    </div>
+    
+    <div class="blog-post-nav row">
+      
+      
+        <div class="nav-link col-md-6">
+          <a href="/2024/08/14/2024%E5%B9%B4%E7%9A%84%E4%B8%83%E5%A4%95/" id="article-nav-older" class="article-nav-link-wrap">
+            2024年的七夕 &gt;&gt;
+          </a>
+        </div>
+      
+    </div>
+        
+  </div>
+  
+            </div>
+            <div class="blog-side col-xs-12 col-sm-12 col-md-12 col-lg-3 col-xl-3 col-xxl-3">
+                <div class="blog-profile">
+                    <div class="blog-author">
+
+    <div class="author-img">
+        <a href="#"><img src="/image/qrcode.jpg" alt=""></a>
+    </div>
+
+    <div class="author-desc">
+        <h1></h1>
+        <p></p>
+    </div>
+</div>
+                </div>
+                <div class="blog-google-ads">
+                    <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+     <!-- EDULINKS-Right -->
+     <ins class="adsbygoogle"
+          style="display:block"
+          data-ad-client="ca-pub-2449691085720111"
+          data-ad-slot="7013232113"
+          data-ad-format="auto"
+          data-full-width-responsive="true"></ins>
+     <script>
+
+     (adsbygoogle = window.adsbygoogle || []).push({});
+</script>                </div>
+            </div>
+        </div>
+    </div>
+    <div class="container-fluid blog-footer">
+        <div class="container">
+            <div class="row blog-friend-link">
+                <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 col-xl-12 col-xxl-12">
+                    <!-- <h3>友情链接</h3> -->
+                </div>
+                
+                
+            </div>
+            <div class="row">
+                <div class="blog-copyright">
+                    <p>&copy; 2020 - 2024 All rights reserved. 冰阔乐yyds&#39;s Blog   </p>
+                </div>    
+            </div>
+        </div>
+    </div>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/js/bootstrap.bundle.min.js" integrity="sha384-ygbV9kiqUc6oa4msXn9868pTtWMgiQaeYH7/t7LECLbyPA2x65Kgf80OJFdroafW" crossorigin="anonymous"></script>
+    
+<script src="/scripts/main.js"></script>
+
+</body>
+</html>
