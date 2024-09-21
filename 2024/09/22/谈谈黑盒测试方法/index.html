@@ -1,0 +1,192 @@
+<!doctype html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>谈谈黑盒测试方法-冰阔乐yyds&#39;s Blog</title>
+    
+    <meta name="keywords" content="">
+    <meta name="description" content="">
+    <link href="/bootstrap-5.1.3-dist/css/bootstrap.min.css" rel="stylesheet">    
+    <link rel="stylesheet" href="/css/main.css" />
+    
+    <meta name="msvalidate.01" content="D8350FC7417B692DE23E5326C13202D3" />
+<meta name="generator" content="Hexo 7.2.0"></head>
+<body class="wave">
+    <nav class="navbar blog-header navbar-expand-lg ">
+        <div class="container-fluid">
+            <a class="navbar-brand" href="/">冰阔乐yyds&#39;s Blog</a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="菜单">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+                
+                    <li class="nav-item">
+                        <a class="nav-link" href="/">首页</a>
+                    </li>
+                
+                    <li class="nav-item">
+                        <a class="nav-link" href="/about/">关于</a>
+                    </li>
+                
+                </ul>
+            </div>
+        </div>
+    </nav>
+    <div class="container blog-content">
+        <div class="row">
+            <div class="col-xs-12 col-sm-12 col-md-12 col-lg-9 col-xl-9 col-xxl-9">
+                <div class="blog-post-detail">
+    <div class="blog-post-title">
+      <h1>谈谈黑盒测试方法</h1>
+    </div>
+    <div class="blog-post-meta">
+        
+        <span class="post-time">更新于：2024-09-22 01:28:59</span>
+        
+        <span class="post-time">发布于：2024-09-22 01:28:16</span>
+    </div>
+    <div class="blog-post-content">
+      <div class="blog-post-ad">
+        <!-- <h3>为感谢各位朋友对本站的关注，在2021年元旦即将到来之际为大家提供一张「腾讯视频VIP兑换卡」，扫描下方的小程序二维码即可参与活动，活动中奖者将获得一张「腾讯视频VIP兑换卡」，感谢大家对小站的支持，祝大家好运并提前祝大家新年快乐！</h3> -->
+        <!-- <div>
+          <a href="https://cloud.tencent.com/developer/grocery-stall3?invitedUid=2725480" target="_parent"><img src="/image/ad_image.png" alt="扫码参与活动，攒云+值，得云+社区定制礼盒"></a>
+        </div> -->
+      </div>
+      <h1 id="谈谈黑盒测试方法"><a href="#谈谈黑盒测试方法" class="headerlink" title="谈谈黑盒测试方法"></a>谈谈黑盒测试方法</h1><p>[TOC]</p>
+<h1 id="一、等价类划分"><a href="#一、等价类划分" class="headerlink" title="一、等价类划分"></a><strong>一、等价类划分</strong></h1><p>概念：</p>
+<p><strong>等价类划分法是一种典型的、重要的黑盒测试方法，是指某个输入域的子集。在该子集合中，所有的输入数据对于揭露软件中的错误都是等效的。</strong></p>
+<p><strong>有效等价类</strong>：有意义的输入构成的集合，对需求规格说明书来说是合法的。</p>
+<p><strong>无效等价类：</strong>不满足需求的输入。</p>
+<p>例如：<strong>学生成绩录入系统，分数X为0到100的整数。</strong></p>
+<p>有效等价类：0≤X≤100（50）</p>
+<p>无效等价类：X≤0（-5），X≥100（200）</p>
+<p>如果没有整数要求，还要考虑小数，非数字（字母，汉字，特殊字符）和空值。</p>
+<p>&#x3D;&#x3D;<strong>但只按照等价类划分还不够，还要考虑边界值。</strong>&#x3D;&#x3D;</p>
+<h1 id="二、边界值分析法"><a href="#二、边界值分析法" class="headerlink" title="二、边界值分析法"></a><strong>二、边界值分析法</strong></h1><blockquote>
+<blockquote>
+<p>边界值分析法是对等价类划分法的补充，一般从等价类的边界寻找错误。</p>
+</blockquote>
+<blockquote>
+<p>边界值分析法的基本思路：</p>
+<p>正好等于边界值，刚好小于边界值，刚好大于边界值作为测试数据。</p>
+</blockquote>
+</blockquote>
+<p>特殊：0&#x2F;空是特殊的值，在考虑边界值的时候也要考虑这个特殊值。</p>
+<p><strong>举个例子</strong></p>
+<p>边界值思想的体现：</p>
+<p>网上购物，库存12。</p>
+<p>数量&#x3D;11：下单成功；数量&#x3D;12：下单成功；数量&#x3D;13：下单失败，并给出提示。</p>
+<p><strong>再比如</strong>：学生成绩录入系统，分数X为0到100的整数。</p>
+<p>上边界：99，100，101</p>
+<p>下边界：-1，0，1</p>
+<p>所以等价类+边界值的取值范围为：-5，-1，0，1，50，99，100，101，200</p>
+<p>因此可分成两个用例：有效输入：0，1，50，99，100；无效输入：-5，-1，101，200。</p>
+<p>再例如：微信红包，最小0.01，最大200。</p>
+<p>等价类+边界值的取值范围：-100.00，0，0.01，0.02，50.00，199.99，200，200.01，300.00。</p>
+<h1 id="三、场景法"><a href="#三、场景法" class="headerlink" title="三、场景法"></a>三、场景法</h1><p>基于用户场景梳理业务逻辑，再挑选合适的方法设计测试用例，尽可能真实全部的模拟用户操作。</p>
+<blockquote>
+<p>场景法主要基于：</p>
+<p>1、业务需求层面：对所测软件的重要功能、业务逻辑（系统要干什么、怎么去实现这个过程的）和行业背景进行深入理解。</p>
+<p>2、技术层面需求：基于等价类划分</p>
+</blockquote>
+<blockquote>
+<ul>
+<li>有效等价类：模拟用户正确操作；</li>
+<li>无效等价类：模拟用户错误的操作；</li>
+</ul>
+</blockquote>
+<p>3、核心概念</p>
+<p>基本流（正确流，有效流）：模拟用户正确的操作流程。</p>
+<p>备选流（错误流，无效流）：模拟用户错误的操作流程。</p>
+<p>举个例子，比如银行ATM取款</p>
+<p>基本流：正确插入银行卡，点击取款，输入正确的密码，输入正确的金额，确认，退卡。</p>
+<ul>
+<li>备选流1：输入错误的密码</li>
+<li>备选流2：输入超过余额的金额</li>
+<li>备选流3：卡插反了</li>
+<li>备选流4：退卡</li>
+</ul>
+<p>再根据每个场景来设计测试用例。</p>
+<h1 id="四、错误推测法（白话：反推法）"><a href="#四、错误推测法（白话：反推法）" class="headerlink" title="四、错误推测法（白话：反推法）"></a><strong>四、错误推测法（白话：反推法）</strong></h1><p>基于经验和直觉推测程序中所有可能存在的各种错误，从而有针对性地设计测试用例的方法。它的要素公共有三点，分别为：</p>
+<blockquote>
+<p>经验、知识、直觉。</p>
+</blockquote>
+<p><strong>举个例子</strong></p>
+<p>题目：注册一个邮箱</p>
+<p>设计：</p>
+<p>1、校验中特殊字符空格的处理?<br>2、密码校验中的大小写？<br>3、姓名中的特殊字符？<br>4、密码发送是否明文</p>
+
+      <div class="blog-post-footer">
+        <!-- <p><img src="/image/qrcode.jpg" alt=""></p>
+        <p><b>用心体验、认真记录</b>，欢迎关注<a target="_blank" rel="noopener" href="https://www.edulinks.cn">大江小浪</a>的技术人生！</p> -->
+      </div>
+    </div>
+    
+    <div class="blog-post-nav row">
+      
+      
+        <div class="nav-link col-md-6">
+          <a href="/2024/08/14/2024%E5%B9%B4%E7%9A%84%E4%B8%83%E5%A4%95/" id="article-nav-older" class="article-nav-link-wrap">
+            2024年的七夕 &gt;&gt;
+          </a>
+        </div>
+      
+    </div>
+        
+  </div>
+  
+            </div>
+            <div class="blog-side col-xs-12 col-sm-12 col-md-12 col-lg-3 col-xl-3 col-xxl-3">
+                <div class="blog-profile">
+                    <div class="blog-author">
+
+    <div class="author-img">
+        <a href="#"><img src="/image/qrcode.jpg" alt=""></a>
+    </div>
+
+    <div class="author-desc">
+        <h1></h1>
+        <p></p>
+    </div>
+</div>
+                </div>
+                <div class="blog-google-ads">
+                    <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+     <!-- EDULINKS-Right -->
+     <ins class="adsbygoogle"
+          style="display:block"
+          data-ad-client="ca-pub-2449691085720111"
+          data-ad-slot="7013232113"
+          data-ad-format="auto"
+          data-full-width-responsive="true"></ins>
+     <script>
+
+     (adsbygoogle = window.adsbygoogle || []).push({});
+</script>                </div>
+            </div>
+        </div>
+    </div>
+    <div class="container-fluid blog-footer">
+        <div class="container">
+            <div class="row blog-friend-link">
+                <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 col-xl-12 col-xxl-12">
+                    <!-- <h3>友情链接</h3> -->
+                </div>
+                
+                
+            </div>
+            <div class="row">
+                <div class="blog-copyright">
+                    <p>&copy; 2020 - 2024 All rights reserved. 冰阔乐yyds&#39;s Blog   </p>
+                </div>    
+            </div>
+        </div>
+    </div>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/js/bootstrap.bundle.min.js" integrity="sha384-ygbV9kiqUc6oa4msXn9868pTtWMgiQaeYH7/t7LECLbyPA2x65Kgf80OJFdroafW" crossorigin="anonymous"></script>
+    
+<script src="/scripts/main.js"></script>
+
+</body>
+</html>
